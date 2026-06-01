@@ -14,6 +14,44 @@ Tessera is an LLM inference API gateway that sits in your request path. It auto-
 
 **Free Sandbox tier: 60M tokens / month, no card required.** Get a key at [tesseraai.io/dev](https://tesseraai.io/dev).
 
+---
+
+## 60-second runnable example
+
+```python
+# Python — pip install "tessera-llm-proxy>=0.1.0,<0.2"
+import tessera, openai
+tessera.activate("tk_your_tessera_key")        # one line
+
+client = openai.OpenAI()                       # your existing code
+client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "Hello"}],
+)
+# Same response shape. Behind the scenes: route + cache + compress + measure.
+# Savings ledger ticks live at ledger.tesseraai.io/portal/audit.
+```
+
+```ts
+// Node / TypeScript — npm install @tessera-llm/tessera-sdk@^0.1.0
+import { activate } from "@tessera-llm/tessera-sdk";
+import OpenAI from "openai";
+
+activate("tk_your_tessera_key");                // one line
+
+const client = new OpenAI();                    // your existing code
+await client.chat.completions.create({
+  model: "gpt-4o",
+  messages: [{ role: "user", content: "Hello" }],
+});
+```
+
+No SDK swap, no wrapper class, no decorator. The provider client you already use gets its `baseURL` + `X-Tessera-Key` header injected at construction time; everything else runs unchanged.
+
+Architecture rationale + verification procedure (audit-immutable savings, multi-source pricing catalog, thin-SDK-by-design): see [ARCHITECTURE.md](./ARCHITECTURE.md).
+
+---
+
 <details>
 <summary>Table of contents</summary>
 
