@@ -48,14 +48,14 @@ dependencies = []
 
 [project.optional-dependencies]
 test = [
-  "pytest>=7.0",
+  "pytest>=9.1.1",
   "pytest-mock>=3.0",
 ]
 # `dev` mirrors `test` — keeps `pip install -e ".[dev]"` (the convention
 # CONTRIBUTING.md tells contributors to run) working without forcing
 # them to remember the alternate `[test]` name.
 dev = [
-  "pytest>=7.0",
+  "pytest>=9.1.1",
   "pytest-mock>=3.0",
 ]
 
